@@ -24,25 +24,38 @@ $(function () {
     });
 
 
-    $("input").hover(function () {   
+    $("input").hover(function () {
+        $("span").remove();
         var tooltip = $(this).attr("tooltip");
-      $(this).after($("<span> " + tooltip + "</span>"));
-  }, function () {
-      $(this).find("span:last").remove();
-  });
+        $(this).after($("<span> " + tooltip + "</span>"));
+    }, function () {
+        $("span").remove();
+    });
+
+
+    var button = ' <div>' +
+        '<button>Show help</button>' +
+        '</div>';
+    $('.forms').after(button);
+
+    $("button").click(function () {
+        $('span').remove();
+        $("input").each(function (index, value) {
+            var tooltip = $(value).attr("tooltip");
+            $(value).after($("<span> " + tooltip + "</span>"));
+        });
+    })
 });
 
 
-var button = '<button></button>';
-$('body').append(button);
-$(function () {
-    $("<button>")
-      .text("Show help")
-      .click(function () {
-          tooltip("open");
-      })
-      .insertAfter("forms");
-})
+//$(function () {
+//    $("button")
+//      .text("Show help")
+//      .click(function () {
+//          tooltip("open");
+//      })
+//      .insertAfter("forms");
+//})
 
 
 
